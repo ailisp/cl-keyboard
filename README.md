@@ -2,7 +2,8 @@
 cl-keyboard is a useful keyboard remap for Common Lispers on Windows. After load it, the `[` and `]` keys will be remap to `(` and `)`, `(` and `)`, which are `Shift+9` and `Shift+0` will be remap to `[` and `]`. The left control (`Ctrl`) is swapped with `Capslock`. The keyboard change will be affect to any program on Windows, unless you close the Lisp process. If you want to automatically load this small utility, you can append this to your Lisp init file (e.g. `~/.sbclrc` for SBCL and `~/ccl-init.lisp` for CCL):
 ```lisp
 #+quicklisp
-(let ((cl-keyboard-init (merge-pathnames "common-lisp/cl-keyboard.lisp")))
+(let ((cl-keyboard-init (merge-pathnames "common-lisp/cl-keyboard.lisp"
+										 (user-homedir-pathname))))
   (when (probe-file cl-keyboard-init)
     (load cl-keyboard-init)))
 ```
