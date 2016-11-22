@@ -1,0 +1,17 @@
+!
+! Swap Caps_Lock and Control_L
+!
+remove Lock = Caps_Lock
+remove Control = Control_L
+keysym Control_L = Caps_Lock
+keysym Caps_Lock = Control_L
+add Lock = Caps_Lock
+add Control = Control_L
+
+!
+! Switch ( with [ and ) with ]
+!
+keycode  18 = 9 bracketleft 9 bracketleft
+keycode  19 = 0 bracketright 0 bracketright
+keycode  34 = parenleft braceleft parenleft braceleft
+keycode  35 = parenright braceright parenright braceright
