@@ -1,10 +1,4 @@
-;;;; cl-keyboard.lisp
-(in-package :cl-user)
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (ql:quickload '(cffi bordeaux-threads)))
-(defpackage :cl-keyboard
-  (:use :cl :cffi))
-(in-package :cl-keyboard)
+(in-package :cl-keyboard/lib)
 
 (define-foreign-library user32
   (:windows (:default "user32")))
