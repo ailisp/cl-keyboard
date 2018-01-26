@@ -8,3 +8,6 @@
 
 #+linux
 (load #P"linux.lisp")
+
+#+darwin
+(load #P "darwin.lisp")

@@ -10,7 +10,7 @@
   (:windows (:default "user32")))
 
 (use-foreign-library user32)
- 
+
 (defctype HHOOK :pointer)
 (defctype HOOKPROC :pointer)
 (defctype HINSTANCE :pointer)
@@ -43,7 +43,7 @@
 	   (cond
 	     ((find w-param `(,+wm-keydown+ ,+wm-syskeydown+))
 	      (let ((key-info (get-key-info l-param)))
-		(if (real-key-event-p key-info) 
+		(if (real-key-event-p key-info)
 		    (process-key-down (get-key-info l-param))
 		    nil)))
 	     ((find w-param `(,+wm-keyup+ ,+wm-syskeyup+))
@@ -53,7 +53,7 @@
 		    nil))))))
 	(if event-processed-p
 	    1
-	  (call-next-hook-ex +null+ n-code w-param l-param))))) 
+	  (call-next-hook-ex +null+ n-code w-param l-param)))))
 
 (defun real-key-event-p (key-info)
   (> (key-info-scan-code key-info) 0))
@@ -71,10 +71,10 @@
 (defun get-key-info (ptr)
   (with-foreign-slots ((vk-code scan-code flags time dw-extra-info) (make-pointer ptr) KBDLLHOOKSTRUCT)
 		      (make-key-info :vk-code vk-code
-				     :scan-code scan-code
-				     :flags flags
-				     :time time
-				     :dw-extra-info dw-extra-info)))
+                             :scan-code scan-code
+                             :flags flags
+                             :time time
+                             :dw-extra-info dw-extra-info)))
 ;;; The following two funciton, if event has been processed return t otherwise nil!
 (defvar *down-keys* nil)
 (defun mark-key-down (key-info)
@@ -230,7 +230,5 @@
 	 (set-windows-hook-ex +wh-keyboard-ll+ (callback low-level-keyboard-proc) +null+  0)))
     (message-loop)
     (unhook-windows-hook-ex hhk-low-level-kbd)))
-			   
+
 (bt:make-thread #'main)
-
-
