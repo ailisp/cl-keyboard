@@ -1,23 +1,33 @@
 ;;;; keyboard.lisp
 ;;;; Platform independent keyboard library interfaces, the
 ;;;; implementation of these interface is platform specific.
+;;;; Each platform should implement at least two functions:
+;;;;
+;;;; KEY-EVENT-LOOP (EVENT-HANDLER)
+;;;; An event loop running infinitely, and whenever receives
+;;;; a new event, will call (EVENT-HANDLER event). Should be
+;;;; call in a separate thread if you don't want to block
+;;;; main thread.
+;;;;
+;;;; SEND-KEY-EVENT (EVENT)
+;;;; Send a event given by EVENT, a helper function to replace
+;;;; and send event or series of event in KEY-EVENT-LOOP.
 
 (in-package :cl-user)
 (defpackage :cl-keyboard/lib
-  (:use :cl))
+  (:use :cl)
+  (:export :key-event-loop
+           :send-key-event
+           :key-event-key
+           :key-event-kind
+           :key-event-time
+           :key-event-source
+           :make-key-event))
+
 (in-package :cl-keyboard/lib)
 
-(defclass <key-event> ()
-  ((key :accessor key-event-key)
-   (kind :accessor key-event-kind)))
-
-(defclass <global-event-handler> ()
-  ((func :accessor event-handler-function)))
-(defclass <global-event-table-handler> (<global-event-handler>)
-  ((table :accessor event-handler-table)))
-
-(defgeneric key-event-loop (event-handler))
-(defgeneric send-key-event ())
+(defstruct key-event
+  key kind time source)
 
 #+windows
 (load #P"windows.lisp")
