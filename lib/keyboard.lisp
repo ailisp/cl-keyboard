@@ -7,7 +7,9 @@
 ;;;; An event loop running infinitely, and whenever receives
 ;;;; a new event, will call (EVENT-HANDLER event). Should be
 ;;;; call in a separate thread if you don't want to block
-;;;; main thread.
+;;;; main thread. EVENT-HANDLER should take the event as
+;;;; argument and return T if event is processed, return NIL
+;;;; to pass the event to system default event handler.
 ;;;;
 ;;;; SEND-KEY-EVENT (EVENT)
 ;;;; Send a event given by EVENT, a helper function to replace
