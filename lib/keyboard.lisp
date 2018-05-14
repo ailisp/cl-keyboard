@@ -30,10 +30,3 @@
 
 (defstruct key-event
   key kind time source)
-
-#+windows
-(load #P"windows.lisp")
-#+linux
-(load #P"linux.lisp")
-#+darwin
-(load #P "darwin.lisp")
